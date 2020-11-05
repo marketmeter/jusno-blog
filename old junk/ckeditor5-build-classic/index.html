@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<link type="text/css" href="sample/css/sample.css" rel="stylesheet" media="screen" />
+	<title>Edit Blog - Create soul to your thoughts</title>
+</head>
+<body>
+
+<!-- <header>
+	<div class="centered">
+		<h1><a href="https://ckeditor.com/ckeditor-5"><img src="sample/img/logo.svg" alt="WYSIWYG editor - CKEditor 5" /></a></h1>
+
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle"></label>
+		  
+		<nav>
+			<ul>
+				<li><a href="https://ckeditor.com/ckeditor-5">Project homepage</a></li>
+				<li><a href="https://ckeditor.com/docs/">Documentation</a></li>
+				<li><a href="https://github.com/ckeditor/ckeditor5">GitHub</a></li>
+			</ul>
+		</nav>
+	</div>
+</header> -->
+
+<main>
+	<div class="message">
+		<div class="centered">
+			<h1>Edit Blog</h1>
+
+			<!-- <p>If you can see CKEditor below, it means that the installation succeeded. You can now try out your new editor version, see its features,
+			and check some of the most useful <a href="#references">resources recommended below</a>.</p> -->
+		</div>
+	</div>
+	<div class="centered">
+		<div id="editor">
+			
+
+			
+
+
+
+		</div>
+		</div>
+	</div>
+</main>
+
+
+<script src="ckeditor.js"></script>
+
+<script>
+	ClassicEditor
+		.create( document.querySelector( '#editor' ), {
+			// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+		} )
+		.then( editor => {
+			window.editor = editor;
+		} )
+		.catch( err => {
+			console.error( err.stack );
+		} );
+</script>
+
+</body>
+</html>
