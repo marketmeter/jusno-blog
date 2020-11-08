@@ -1,3 +1,17 @@
+<?php
+    session_start();
+    include_once '../database.php';
+   
+   $Sql = "SELECT * FROM category where publish='1'";
+  $category = mysqli_query($conn, $Sql);
+
+   $Sql1 = "SELECT * FROM subcategory where publish='1'";
+  $subcategories1 = mysqli_query($conn, $Sql1);
+        $subcategory=array();
+       while($subcategories = mysqli_fetch_assoc($subcategories1)){ 
+        $subcategory[]=$subcategories;
+      }
+   ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,228 +59,31 @@
 <!--============================= CATEGORIES =============================-->
     <section class="main-block">
         <div class="container">
-   
-        <h4 align="left" style="color: gray;">Common</h4>
+       <?php while($categories = mysqli_fetch_assoc($category)){ ?>
+
+        <h4 align="left" style="color: gray;"><?php echo $categories['name'];?></h4>
+                  
+
             <div class="row">
+               <?php foreach ($subcategory as $data) { 
+                     if ($data['category']==$categories['id']) {?>
                 <div class="col-md-2 category-responsive">
-                    <a href="questions.php" class="category-wrap">
+                    <a href="questions.php?id=<?php echo $data['id']; ?>" class="category-wrap">
                         <div class="category-block">
-                          <img src="../icons/jusno.png" width="60px;" height="60px;">
-                             <h6><b>Aadhaar</b></h6>
+                          <img src="../uploads/<?php echo $data['image']?>" width="60px;" height="60px;">
+                             <h6><b><?php echo $data['name']; ?></b></h6>
                         </div> 
                     </a>
                 </div>
 
-
-                <div class="col-md-2 category-responsive">
-                    <a href="#" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/election.png" width="60px;" height="60px;">
-                             <h6><b>Certificates</b></h6>
-                        </div> 
-                    </a>
-                </div>
-
-
-                <div class="col-md-2 category-responsive">
-                    <a href="#" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/bus.svg" width="60px;" height="60px;">
-                             <h6><b>Ration Card</b></h6>
-                        </div> 
-                    </a>
-                </div>
-	      
-                <div class="col-md-2 category-responsive">
-                    <a href="#" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/atm.svg" width="60px;" height="60px;">
-                             <h6><b>Start a Business</b></h6>
-                        </div> 
-                    </a>
-                </div>            
-           
-              <div class="col-md-2 category-responsive">
-                    <a href="#" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/forest.svg" width="60px;" height="60px;">
-                             <h6><b>Identity Card</b></h6>
-                        </div> 
-                    </a>
-                </div>
+               
+          <?php }} ?>
             </div>
+        <?php } ?>
 
   <hr width="100%" color="#e5e7ef">
    
-        <h4 align="left" style="color: gray;">Banking</h4>
- 
-            <div class="row">
-                
-                <div class="col-md-2 category-responsive">
-                    <a href="../election/index.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/election.png" width="60px;" height="60px;">
-                             <h6><b>Election Result</b></h6>
-                        </div> 
-                    </a>
-                </div>
-
-
-                <div class="col-md-2 category-responsive">
-                    <a href="../display/bus_table.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/bus.svg" width="60px;" height="60px;">
-                             <h6><b>Travel</b></h6>
-                        </div> 
-                    </a>
-                </div>
-        
-                <div class="col-md-2 category-responsive">
-                    <a href="../display/atm.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/atm.svg" width="60px;" height="60px;">
-                             <h6><b>Bankiing</b></h6>
-                        </div> 
-                    </a>
-                </div>            
-           
-              <div class="col-md-2 category-responsive">
-                    <a href="../display/forest.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/forest.svg" width="60px;" height="60px;">
-                             <h6><b>Forest</b></h6>
-                        </div> 
-                    </a>
-                </div>
-            
-
-                <div class="col-md-2 category-responsive">
-                    <a href="../display/mandi.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/market.jpg" width="60px;" height="60px;">
-                             <h6><b>Agriculture</b></h6>
-                        </div> 
-                    </a>
-                </div> 
-                  
-                <div class="col-md-2 category-responsive">
-                    <a href="../display/medical.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/medical.png" width="60px;" height="60px;">
-                             <h6><b>Medical</b></h6>
-                        </div> 
-                    </a>
-                </div>
-        
-                <!-- <div class="col-md-2 category-responsive">
-                    <a href="../display/fire.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/fire.svg" width="60px;" height="60px;">
-                             <h6><b>Fire Department</b></h6>
-                        </div> 
-                    </a>
-                </div> -->
-         
-                <div class="col-md-2 category-responsive">
-                    <a href="../display/police.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/police.png" width="60px;" height="60px;">
-                             <h6><b>Police Department</b></h6>
-                        </div> 
-                    </a>
-                </div>
-            </div>
-
-
-<hr width="100%" color="#e5e7ef">
-   
-  <h4 align="left" style="color: gray;">Scholarships</h4>
- 
-            <div class="row">
-                <div class="col-md-2 category-responsive">
-                    <a href="https://play.google.com/store/apps/details?id=com.jusno.jusno" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/jusno.png" width="60px;" height="60px;">
-                             <h6><b>Download Jusno App</b></h6>
-                        </div> 
-                    </a>
-                </div>
-
-
-                <div class="col-md-2 category-responsive">
-                    <a href="../election/index.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/election.png" width="60px;" height="60px;">
-                             <h6><b>Election Result</b></h6>
-                        </div> 
-                    </a>
-                </div>
-
-
-                <div class="col-md-2 category-responsive">
-                    <a href="../display/bus_table.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/bus.svg" width="60px;" height="60px;">
-                             <h6><b>Travel</b></h6>
-                        </div> 
-                    </a>
-                </div>
-        
-                <div class="col-md-2 category-responsive">
-                    <a href="../display/atm.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/atm.svg" width="60px;" height="60px;">
-                             <h6><b>Bankiing</b></h6>
-                        </div> 
-                    </a>
-                </div>            
-           
-              <div class="col-md-2 category-responsive">
-                    <a href="../display/forest.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/forest.svg" width="60px;" height="60px;">
-                             <h6><b>Forest</b></h6>
-                        </div> 
-                    </a>
-                </div>
-            
-
-                <div class="col-md-2 category-responsive">
-                    <a href="../display/mandi.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/market.jpg" width="60px;" height="60px;">
-                             <h6><b>Agriculture</b></h6>
-                        </div> 
-                    </a>
-                </div> 
-                  
-                <div class="col-md-2 category-responsive">
-                    <a href="../display/medical.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/medical.png" width="60px;" height="60px;">
-                             <h6><b>Medical</b></h6>
-                        </div> 
-                    </a>
-                </div>
-        
-                <!-- <div class="col-md-2 category-responsive">
-                    <a href="../display/fire.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/fire.svg" width="60px;" height="60px;">
-                             <h6><b>Fire Department</b></h6>
-                        </div> 
-                    </a>
-                </div> -->
-         
-                <div class="col-md-2 category-responsive">
-                    <a href="../display/police.php" class="category-wrap">
-                        <div class="category-block">
-                          <img src="../icons/police.png" width="60px;" height="60px;">
-                             <h6><b>Police Department</b></h6>
-                        </div> 
-                    </a>
-                </div>
-            </div>
+       
  
         </div>
         </div>

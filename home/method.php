@@ -1,3 +1,20 @@
+<?php
+    session_start();
+    include_once '../database.php';
+    $id=$_GET['id'];
+    $cid=$_GET['cid'];
+
+    $Sql = "SELECT answers.*,questions.title as question_title FROM answers join questions on questions.id=answers.questions  where answers.questions='$id'  ";
+    $answers = mysqli_query($conn, $Sql);
+
+     $Sql2 = "SELECT answers.*,questions.title as question_title FROM answers join questions on questions.id=answers.questions  where answers.questions='$id'  ";
+    $methods = mysqli_query($conn, $Sql2);
+
+
+    $Sql1 = "SELECT * FROM questions where subcategory='$cid' and publish='1' ";
+   $questions = mysqli_query($conn, $Sql1);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,10 +60,12 @@
 <!-- #######################     State Include     ######################## -->
 
 <div class="container">
-    <a type="button" class="btn btn-info">Method 1</a>
-    <a type="button" class="btn btn-outline-info">Method 2</a>
-    <a type="button" class="btn btn-outline-info">Method 3</a>
-    <a type="button" class="btn btn-outline-info">Method 4</a>    
+       <?php while($data = mysqli_fetch_assoc($methods)){ ?>
+
+    <a type="button" class="btn btn-outline-info"><?php echo $data['type'] ?></a>
+<?php } ?>
+
+   
 </div>
 
 
@@ -54,12 +73,12 @@
 
 <div class="container">
    <a class="btn btn-success btn-sm" style="color: white;">Ask Quistion</a>
+       <?php while($data = mysqli_fetch_assoc($answers)){ ?>
 
-  <h1 style="font-size: 20px; color: gray;">How to Apply Aadhaar Card in Tamilnadu ?</h1>
+  <h1 style="font-size: 20px; color: gray;"> <?php echo $data['question_title'] ?></h1>
 
   <p>
-    <h6>Method 1:</h6>Bootstrap 4 is the newest version of Bootstrap; with new components, faster stylesheet and more responsiveness.
-Bootstrap 4 supports the latest, stable releases of all major browsers and platforms. However, Internet Explorer 9 and down is not supported.Bootstrap 4 is the newest version of Bootstrap; with new components.
+    <h6><?php echo $data['heading'] ?></h6><?php echo $data['content'] ?>
 <h6>Method 2:</h6> faster stylesheet and more responsiveness.
 Bootstrap 4 supports the latest, stable releases of all major browsers and platforms. However, Internet Explorer 9 and down is not supported.</p>
 
@@ -68,38 +87,25 @@ Bootstrap 4 supports the latest, stable releases of all major browsers and platf
   <label for="comment">Comment:</label>
   <textarea class="form-control" rows="5" id="comment"></textarea>
 </div> -->
-
+<?php } ?>
 </div>
 
 
 
 <div class="container">
     <h6 style="color: gray;">More Questions</h6>
+        <?php while($row = mysqli_fetch_assoc($questions)){  ?>
 
     <li class="list-group-item d-flex justify-content-between align-items-center ">
-      <a href="Methods.php" style="color: gray;">How to Apply Aadhar</a>
+      <a href="method.php?id=<?php echo $row['id']; ?>&&cid=<?php echo $cid; ?>" style="color: gray;"><?php echo $row['title'] ?></a>
       <span class="badge badge-primary badge-pill">12</span>
 
-      <li  class="list-group-item justify-content-between align-items-center "><p><a href="#"> hsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsaj...</a></p>
+      <li  class="list-group-item justify-content-between align-items-center "><p><a href="#"><?php echo $row['description'] ?></a></p>
       </li>  
     
       <br>
 
-     <li class="list-group-item d-flex justify-content-between align-items-center ">
-      <a href="Methods.html" style="color: gray;">How to Apply Aadhar</a>
-      <span class="badge badge-primary badge-pill">12</span>
-
-      <li  class="list-group-item justify-content-between align-items-center "><p><a href="#"> hsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsaj...</a></p>
-      </li>  
-    
-      <br>
-
-      <li class="list-group-item d-flex justify-content-between align-items-center ">
-      <a href="Methods.html" style="color: gray;">How to Apply Aadhar</a>
-      <span class="badge badge-primary badge-pill">12</span>
-
-      <li  class="list-group-item justify-content-between align-items-center "><p><a href="#"> hsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsaj...</a></p>
-      </li>  
+     <?php } ?>
 </div>
 
 <!-- #######################     CONTENT     ######################## -->

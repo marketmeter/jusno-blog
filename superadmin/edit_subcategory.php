@@ -1,0 +1,123 @@
+<?php
+    session_start();
+    include_once '../database.php';
+   
+   $Sql = "SELECT * FROM category";
+  $category = mysqli_query($conn, $Sql);
+  $Sql1 = "SELECT * FROM subcategory where id='".$_GET['id']."'";
+  $subcategory = mysqli_query($conn, $Sql1);
+
+    
+   ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags --> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="mmk">
+    <meta name="description" content="Jusno is an Explore Talavadi Get everything about talavadi.It includes thalavady photos,thalavadi resorts,thalavadi weather etc,.">
+ 
+   <title>Jusno | Procedure for everything, Aadhar, Pan, etc</title> 
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="http://jusno.in" />
+     <meta charset="UTF-8"> 
+    <meta name="theme-color" content="#373942"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/boostrap/maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="../css/boostrap/ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="../css/boostrap/cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="../css/boostrap/maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/main-style.css">
+  <link rel="stylesheet" type="text/css" href="../css/responsive-style.css">
+  <link rel="icon" href="../icons/jus.png"> 
+      <!-- Main CSS -->
+  <link rel="stylesheet" href="../css/style.css"> 
+
+</head>
+
+<?php 
+  include"../header/header.php"
+?>
+
+<!-- #######################     CONTENT     ######################## -->
+
+
+<div class="container">
+	<div class="row">
+		<div class="col">
+		</div>
+<div class=".col-sm-2" style="padding: 2px;"><a type="button" class="btn btn-secondary" href="portal.php">Home</a></div>
+<div class="col">
+  <h2>Add Sub Category</h2>
+
+  <form action="controller/edit_subcategory_controller.php" method="post" enctype='multipart/form-data'>
+          <?php while($subcategories = mysqli_fetch_assoc($subcategory)){  ?> 
+        <input type="hidden" name="id" value="<?php echo $subcategories['id']?>">
+   
+    <div class="form-group">
+      <label for="sel1">Select Category (select one):</label>
+      <select class="form-control" id="sel1" name="category" >
+        <option value="<?php echo $subcategories['category']?>">Previous value</option>
+        <?php while($row = mysqli_fetch_assoc($category)){  ?> 
+        <option value="<?php echo $row['id']  ?>"><?php echo $row['name'];?></option>
+        <?php }?>
+      </select>
+       <br>
+	      <div class="input-group mb-3">
+		    <div class="input-group-prepend">
+		      <span class="input-group-text">Name</span>
+		    </div>
+		    <input type="text" name="name" value="<?php echo $subcategories['name']?>" class="form-control">
+		  </div>
+
+			 <div class="form-group">
+		     <textarea class="form-control" rows="5" id="comment" name="description" placeholder="Add Description"><?php echo $subcategories['description']?></textarea>
+		    </div>
+
+		    <div class="custom-file mt-3 mb-3">
+				  <input type="file" name="image_file" class="custom-file-input" id="customFile">
+          <img src="../uploads/<?php echo $subcategories['image']?>">
+				  <label class="custom-file-label" for="customFile">Select Image</label>
+				</div>
+
+	     <label for="sel2">Visibility</label>
+	      <select class="form-control" id="sel2" name="publish" >
+          <option value="<?php echo $subcategories['publish']?>">Preivious value</option>
+	        
+          <option value="0">Hide</option>
+	        <option value="1">Show</option>	        
+	      </select>
+
+
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  <?php }?>
+  </form>
+</div>
+
+
+
+		  <div class="col"></div>
+  </div>
+</div>
+
+
+
+<!-- #######################     CONTENT     ######################## -->
+<?php
+  include"../header/footer.php"
+?>
+
+
+
+
+
+
+</body>
+</html>

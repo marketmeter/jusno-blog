@@ -62,7 +62,7 @@
         Admin
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="../supadmin/portal.php">Profile</a>
+        <a class="dropdown-item" href="../superadmin/portal.php">Profile</a>
         <a class="dropdown-item" href="#">Dashboard</a>
         <a class="dropdown-item" href="#">Settings</a><hr>
         <a class="dropdown-item" href="#">Logout</a>

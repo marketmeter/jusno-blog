@@ -1,3 +1,13 @@
+<?php
+    session_start();
+    include_once '../database.php';
+   
+    $cid=$_GET['id'];
+    
+    $Sql = "SELECT * FROM questions where subcategory='$cid' and publish='1' ";
+   $questions = mysqli_query($conn, $Sql);
+    
+   ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,32 +49,19 @@
   <div class="container" style="padding-top: 3px;">
   
     <a class="btn btn-success btn-sm" style="color: white;">Ask Quistion</a>
+        <?php while($row = mysqli_fetch_assoc($questions)){  ?>
 
     <li class="list-group-item d-flex justify-content-between align-items-center ">
-      <a href="method.php" style="color: gray;">How to Apply Aadhar</a>
+      <a href="method.php?id=<?php echo $row['id']; ?>&&cid=<?php echo $cid; ?>" style="color: gray;"><?php echo $row['title'] ?></a>
       <span class="badge badge-primary badge-pill">12</span>
 
-      <li  class="list-group-item justify-content-between align-items-center "><p><a href="#"> hsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsaj...</a></p>
+      <li  class="list-group-item justify-content-between align-items-center "><p><a href="#"> <?php echo $row['description'] ?></a></p>
       </li>  
     
       <br>
 
-     <li class="list-group-item d-flex justify-content-between align-items-center ">
-      <a href="method.php" style="color: gray;">How to Apply Aadhar</a>
-      <span class="badge badge-primary badge-pill">12</span>
-
-      <li  class="list-group-item justify-content-between align-items-center "><p><a href="#"> hsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsaj...</a></p>
-      </li>  
-    
-      <br>
-
-      <li class="list-group-item d-flex justify-content-between align-items-center ">
-      <a href="method.php" style="color: gray;">How to Apply Aadhar</a>
-      <span class="badge badge-primary badge-pill">12</span>
-
-      <li  class="list-group-item justify-content-between align-items-center "><p><a href="#"> hsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsajd hjf hjasd nweiad najsd nasjd nasjhsd hjas dhajs djas dhajsd hsaj...</a></p>
-      </li>  
-
+     
+<?php }?>
 
 </ul>
 
